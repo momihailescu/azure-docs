@@ -44,7 +44,7 @@ validate your shell environment of choice.
 
 ## <a name="count-resources"></a>Count Azure resources
 
-This query returns number of Azure resources that exist in the subscriptions that you have access
+This query returns the number of Azure resources that exist in all the subscriptions that you have access
 to. It's also a good query to validate your shell of choice has the appropriate Azure Resource
 Graph components installed and in working order.
 
@@ -202,7 +202,7 @@ Search-AzGraph -Query "where type contains 'publicIPAddresses' and isnotempty(pr
 
 ## <a name="count-resources-by-ip"></a>Count resources that have IP addresses configured by subscription
 
-Using the previous example query and adding `summarize` and `count()`, we can get a list by subscription of resources with configured IP addresses.
+Using the previous example query and adding `summarize` and `count()`, we can get a list of subscriptions and their corresponding count of resources with configured IP addresses.
 
 ```Query
 where type contains 'publicIPAddresses' and isnotempty(properties.ipAddress)
@@ -220,8 +220,8 @@ Search-AzGraph -Query "where type contains 'publicIPAddresses' and isnotempty(pr
 ## <a name="list-tag"></a>List resources with a specific tag value
 
 We can limit the results by properties other than the Azure resource type, such as a tag. In this
-example, we're filtering for Azure resources with a tag name of **Environment** that have a value
-of **Internal**.
+example, we're filtering for Azure resources with the tag name **environment** that have a value
+of **internal**.
 
 ```Query
 where tags.environment=~'internal'
@@ -236,7 +236,7 @@ az graph query -q "where tags.environment=~'internal' | project name"
 Search-AzGraph -Query "where tags.environment=~'internal' | project name"
 ```
 
-To also provide what tags the resource has and their values, add the property **tags** to the
+To also filter by the tags a resource has and their values, add the property **tags** to the
 `project` keyword.
 
 ```Query
@@ -254,7 +254,7 @@ Search-AzGraph -Query "where tags.environment=~'internal' | project name, tags"
 
 ## <a name="list-specific-tag"></a>List all storage accounts with specific tag value
 
-Combine the filter functionality of the previous example and filter Azure resource type by **type**
+Combine the filter functionality of the previous example and filter the Azure resource type by the **type**
 property. This query also limits our search for specific types of Azure resources with a specific
 tag name and value.
 
